@@ -1,4 +1,4 @@
-package WordList::Phrase::EN::Idiom::Wiktionary;
+package WordList::Phrase::EN::Quote::JamesFT;
 
 # AUTHORITY
 # DATE
@@ -8,13 +8,16 @@ package WordList::Phrase::EN::Idiom::Wiktionary;
 # STATS
 
 our $DYNAMIC=1;
+our $SORT = 'custom';
 
-use parent 'WordList::Tables';
+use parent 'WordList';
 
 sub new {
+    require Tables::Quotes::JamesFT;
+
     my $class = shift;
-    my $self = $class->SUPER::new(
-        table => 'Quotes::JamesFT', column => 'quote');
+    my $self = $class->SUPER::new;
+    $self->{_table} = Tables::Quotes::JamesFT->new;
     $self;
 }
 
@@ -23,6 +26,11 @@ sub next_word {
     my $row = $self->{_table}->get_row_arrayref;
     return unless $row;
     qq("$row->[0]" -- $row->[1]);
+}
+
+sub reset_iterator {
+    my $self = shift;
+    $self->{_table}->reset_iterator;
 }
 
 1;
