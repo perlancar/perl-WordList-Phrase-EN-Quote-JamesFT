@@ -13,11 +13,11 @@ our $SORT = 'custom';
 use parent 'WordList';
 
 sub new {
-    require Tables::Quotes::JamesFT;
+    require TableData::Quote::JamesFT;
 
     my $class = shift;
     my $self = $class->SUPER::new;
-    $self->{_table} = Tables::Quotes::JamesFT->new;
+    $self->{_table} = TableData::Quote::JamesFT->new;
     $self;
 }
 
